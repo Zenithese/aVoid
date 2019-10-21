@@ -2,6 +2,14 @@ import * as APIUtil from '../util/todo_util';
 
 export const RECEIVE_TODO = "RECEIVE_TODO"
 export const REMOVE_TODO = "REMOVE_TODO"
+export const RECEIVE_ALL_TODOS = "RECEIVE_ALL_TODOS"
+
+export const receiveAllTodos = (todos) => {
+    return {
+        type: RECEIVE_ALL_TODOS,
+        todos,
+    }
+}
 
 export const receiveTodo = (payload) => {
 
@@ -18,6 +26,14 @@ export const removeTodo = (payload) => {
         payload,
     }
 }
+
+export const fetchTodos = () => dispatch => {
+    return APIUtil.fetchTodos().then(todos => dispatch(receiveAllTodos(todos)))
+}
+
+// export const fetchTodo = (id) => dispatch => {
+//     return APIUtil.fetchTodo(id).then(todo => dispatch(receiveTodo(todo)))
+// }
 
 export const createTodo = (todo) => dispatch => {
 

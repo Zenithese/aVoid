@@ -1,4 +1,5 @@
 import {
+    RECEIVE_ALL_TODOS,
     RECEIVE_TODO,
     REMOVE_TODO
 } from '../actions/todo_actions';
@@ -6,6 +7,8 @@ import {
 const todoReducer = (state = {}, action) => {
     Object.freeze(state);
     switch (action.type) {
+        case RECEIVE_ALL_TODOS:
+            return action.todos
         case RECEIVE_TODO:
             return Object.assign({}, state, action.todo);
         case REMOVE_TODO:
