@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 
 class AddTodo extends Component {
     state = {
-        content: ""
+        body: ""
     }
     handleChange = (e) => {
         this.setState({
-            content: e.target.value
+            body: e.target.value
         })
     }
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.addTodo(this.state);
         this.setState({
-            content: ""
+            body: ""
         })
     }
     render(){
@@ -21,7 +21,7 @@ class AddTodo extends Component {
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <label>Add new avoidance:</label>
-                    <input type="text" onChange={this.handleChange} value={this.state.content}></input>
+                    <input type="text" onChange={this.handleChange} value={this.state.body}></input>
                 </form>
             </div>
         )
