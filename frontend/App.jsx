@@ -7,15 +7,13 @@ import { fetchTodos, createTodo, deleteTodo } from './actions/todo_actions'
 
 class App extends Component {
   state = {
-    todos: [
-      { id: 1, body: "create todo app" },
-      { id: 2, body: "rejoice! for it's brief..." }
-    ],
-    // thing: this.props.thing,
-    // todos: this.props.todos
+    // todos: [
+    //   { id: 1, body: "create todo app" },
+    //   { id: 2, body: "rejoice! for it's brief..." }
+    // ],
+    todos: this.props.todos
   }
   componentDidMount(){
-    // console.log(this.state.thing)
     this.props.fetchTodos();
   }
   deleteTodo = (id) => {
@@ -36,7 +34,7 @@ class App extends Component {
     this.props.createTodo(todo)
   }
   render(){
-    // console.log(this.props.thing)
+    console.log(this.state.todos)
     return (
       <div className="todo-app container">
         <h1 className="center blue-text">aVoidance</h1>
@@ -51,7 +49,6 @@ class App extends Component {
 
 const mps = (state, props) => {
   return {
-    thing: "thing",
     todos: Object.values(state.entities.todos)
   }
 };

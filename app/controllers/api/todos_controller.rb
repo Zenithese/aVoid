@@ -1,7 +1,8 @@
 class Api::TodosController < ApplicationController
     def index
         @todos = Todo.all
-        render("api/todo/index.json.jbuilder")
+        # render("api/todo/index.json.jbuilder")
+        render :index
     end
 
     def show
