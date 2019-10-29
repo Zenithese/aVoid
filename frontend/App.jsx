@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Todos from './Todos';
 import AddTodo from './AddTodo';
+import { connect } from 'react-redux';
+// import { withRouter } from 'react-router-dom';
+import { fetchTodos, createTodo, deleteTodo } from './actions/todo_actions'
 
 class App extends Component {
   state = {
@@ -8,10 +11,12 @@ class App extends Component {
       { id: 1, body: "create todo app" },
       { id: 2, body: "rejoice! for it's brief..." }
     ],
-    thing: this.props.thing
+    // thing: this.props.thing,
+    // todos: this.props.todos
   }
   componentDidMount(){
-    console.log(this.state.thing)
+    // console.log(this.state.thing)
+    this.props.fetchTodos();
   }
   deleteTodo = (id) => {
     const todos = this.state.todos.filter(todo => {
@@ -28,10 +33,10 @@ class App extends Component {
     this.setState({
       todos
     })
-    // this.props.createTodo(todo)
+    this.props.createTodo(todo)
   }
   render(){
-    console.log(this.props.thing)
+    // console.log(this.props.thing)
     return (
       <div className="todo-app container">
         <h1 className="center blue-text">aVoidance</h1>
@@ -42,4 +47,20 @@ class App extends Component {
   }
 }
 
-export default App;
+// export default App;
+
+const mps = (state, props) => {
+  return {
+    thing: "thing",
+    todos: Object.values(state.entities.todos)
+  }
+};
+
+const mdp = (dispatch) => ({
+  fetchTodos: () => dispatch(fetchTodos()),
+  // fetchTodo: (todo) => dispatch(fetchTodo(todo)),
+  createTodo: (todo) => dispatch(createTodo(todo)),
+  deleteTodo: (id) => dispatch(deleteTodo(id)),
+});
+
+export default (connect(mps, mdp)(App));
